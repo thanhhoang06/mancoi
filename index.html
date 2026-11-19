@@ -84,6 +84,15 @@
       user-select: none;
     }
 
+    [class*="netlify"],
+    [id*="netlify"],
+    iframe[src*="netlify"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
     .petal {
       position: absolute;
       pointer-events: none;
@@ -481,6 +490,8 @@
       particlesContainer.appendChild(el);
     }
 
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlFoUFcZ1VdGbV5wT4eAvKABBD5Aqau8QOvT5IGsF_KlWm9vMG3uX0qyfJSmFsqNEgyg/exec";
+
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
     const textYes = document.getElementById('text-yes');
@@ -687,19 +698,36 @@
         colors: ['#f43f5e', '#fda4af', '#fecdd3', '#fed7aa', '#fff']
       });
 
+      const wishTypeLabels = {
+        'private': 'Gửi riêng 1 bạn',
+        'group': 'Gửi cả nhóm',
+        'both': 'Cả hai luôn'
+      };
+
       const newWish = {
         id: Date.now(),
-        type: currentWishType,
+        type: wishTypeLabels[currentWishType] || currentWishType,
         sender,
         recipient: currentWishType !== 'group' ? recipient : 'Cả nhóm',
-        privateMsg,
-        groupMsg,
+        privateMsg: currentWishType === 'group' ? '' : privateMsg,
+        groupMsg: currentWishType === 'private' ? '' : groupMsg,
         badge,
         createdAt: new Date().toLocaleString('vi-VN')
       };
       const savedWishes = JSON.parse(localStorage.getItem('mens_day_wishes') || '[]');
       savedWishes.unshift(newWish);
       localStorage.setItem('mens_day_wishes', JSON.stringify(savedWishes));
+
+      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')) {
+        try {
+          fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(newWish)
+          }).catch(err => console.log('Sync status:', err));
+        } catch (err) {}
+      }
 
       document.getElementById('step-3').classList.add('hidden');
       document.getElementById('step-4').classList.remove('hidden');
