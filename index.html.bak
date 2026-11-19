@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gửi Lời Chúc 19/11 Yêu Thương 💌 | Dành Tặng Các Chàng Trai</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
+
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Gửi Lời Chúc 19/11 Yêu Thương 💌 | Dành Tặng Các Chàng Trai">
+  <meta property="og:description" content="Gửi lời chúc mừng ngày Quốc tế Nam giới 19/11 đến các bạn nam đáng yêu!">
+  <meta property="og:image" content="logo.jpg">
+
+  <!-- Google Fonts: Be Vietnam Pro & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+            handwriting: ['"Dancing Script"', 'cursive'],
+          },
+          colors: {
+            peach: {
+              50: '#fffaf5',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+            },
+            rosepastel: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+            }
+          },
+          animation: {
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'bounce-gentle': 'bounceGentle 2s infinite',
+            'scale-pop': 'scalePop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            bounceGentle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-5px)' },
+            },
+            scalePop: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Tone màu Hồng Pastel / Đào ngọt ngào, lãng mạn */
+    body {
+      background: linear-gradient(135deg, #fff1f2 0%, #fff7ed 50%, #fdf2f8 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Hiệu ứng hạt tim & hoa đào bay */
+    .petal {
+      position: absolute;
+      pointer-events: none;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* Card kính mờ tone hồng phấn mềm mại */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 45px -15px rgba(244, 63, 94, 0.15), 0 8px 20px -8px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+
+    /* Nút Có phóng to mượt mà */
+    #btn-yes {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+      transform-origin: center center;
+      touch-action: manipulation;
+    }
+
+    /* Nút Không nhảy & thu nhỏ */
+    #btn-no {
+      transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, opacity 0.25s ease;
+      will-change: transform;
+      touch-action: manipulation;
+    }
+
+    /* Thẻ thiệp thư tay */
+    .letter-card {
+      background: #fffdfa;
+      box-shadow: 0 10px 30px -10px rgba(225, 29, 72, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid #fce7f3;
+    }
+
+    /* Lựa chọn được active */
+    .option-card.selected {
+      border-color: #f43f5e;
+      background: #fff1f2;
+      box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.2);
+    }
+  </style>
+</head>
+<body class="text-slate-800 flex flex-col justify-between min-h-screen relative font-sans p-3 sm:p-6 md:p-8">
+
+  <!-- Floating Ambient Particles (Cánh hoa đào, trái tim, ngôi sao) -->
+  <div id="particles-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+  <!-- Header nhỏ phía trên -->
+  <header class="w-full max-w-lg mx-auto text-center pt-2 sm:pt-4 relative z-10">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur border border-rose-200/80 shadow-sm animate-bounce-gentle">
+      <img src="logo.jpg" onerror="this.style.display='none'" alt="Logo" class="w-5 h-5 rounded-full object-cover ring-1 ring-rose-400">
+      <span class="text-xs font-bold text-rose-600 tracking-wide uppercase">SVCG Nhóm Mân Côi tại Huế</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-xl mx-auto my-auto relative z-10 py-4">
+
+    <!-- ========================================== -->
+    <!-- BƯỚC 1: CÂU HỎI TƯƠNG TÁC (CÓ / KHÔNG)      -->
+    <!-- ========================================== -->
+    <section id="step-1" class="glass-card rounded-3xl p-6 sm:p-9 text-center animate-scale-pop relative overflow-visible">
+      
+      <!-- Ảnh nhóm kỷ niệm hình tròn nhỏ gọn, xinh xắn -->
+      <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4">
+        <div class="absolute inset-0 rounded-full bg-rose-400/20 blur-md animate-pulse-slow"></div>
+        <img src="group-photo.jpg" onerror="this.src='assets/group-photo.jpg'" alt="Ảnh nhóm" class="w-full h-full rounded-full object-cover object-center shadow-lg border-2 border-white ring-2 ring-rose-300 relative z-10 hover:scale-105 transition-transform duration-300">
+        <span id="step-icon" class="absolute -bottom-1 -right-1 text-2xl z-20 animate-bounce-gentle"></span>
+      </div>
+
+      <!-- Tag lời chào -->
+      <div class="inline-block px-3 py-1 bg-rose-50 border border-rose-200 rounded-full text-[11px] font-bold text-rose-600 mb-3 tracking-wider uppercase">
+        Boy's day 🌹
+      </div>
+
+      <!-- Tiêu đề câu hỏi chính -->
+      <h1 class="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-3">
+        Bạn có muốn gửi lời chúc đặc biệt đến các bạn nam Mân Côi không nhỉ?
+      </h1>
+      <p class="text-slate-500 text-xs sm:text-sm font-normal max-w-md mx-auto mb-8">
+        (Hôm nay là ngày 19/11 của các chàng trai đó, họ đang rất háo hức chờ lời chúc từ bạn nè... 🤭💌)
+      </p>
+
+      <!-- Khung chứa 2 nút (Thiết kế thanh thoát chuẩn video viral) -->
+      <div id="buttons-wrapper" class="relative min-h-[130px] flex items-center justify-center gap-4 sm:gap-5 flex-wrap sm:flex-nowrap px-2">
+        <!-- Nút CÓ (Tự động bay về chính giữa khi nút Không né tránh) -->
+        <button id="btn-yes" class="z-20 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white font-extrabold text-base shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:brightness-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap">
+          <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
+          <span id="text-yes">Có chứ nè! 🙋‍♀️</span>
+        </button>
+
+        <!-- Nút KHÔNG (Nhảy rõ ràng & thu nhỏ dần) -->
+        <button id="btn-no" class="z-10 px-6 py-3.5 rounded-2xl bg-slate-100/95 text-slate-600 font-bold text-sm sm:text-base border border-slate-200/90 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-300 shadow-sm cursor-pointer whitespace-nowrap">
+          <span id="text-no">Không 🙅‍♀️</span>
+        </button>
+      </div>
+
+      <!-- Hint text -->
+      <p id="hint-text" class="text-xs text-slate-400 mt-5 transition-all">
+        💡 Đừng ngần ngại gửi một lời chúc ấm áp nhé!
+      </p>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- BƯỚC 2: CHỌN HÌNH THỨC GỬI LỜI CHÚC        -->
+    <!-- ========================================== -->
+    <section id="step-2" class="hidden glass-card rounded-3xl p-5 sm:p-8 text-center animate-scale-pop relative overflow-hidden">
+      <!-- Tag đặc biệt kèm Logo nhóm -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-xs sm:text-sm font-extrabold text-rose-600 mb-3 animate-bounce-gentle">
+        <img src="logo.jpg" onerror="this.src='assets/logo.jpg'" alt="Logo" class="w-4 h-4 rounded-full object-cover">
+        <span>CHỌN HÌNH THỨC GỬI LỜI CHÚC</span>
+      </div>
+
+      <!-- Main Title -->
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-2">
+        Hôm nay là ngày của các chàng trai! 🎩🌹
+      </h2>
+      <p class="text-slate-500 text-xs sm:text-sm mb-6">Bạn muốn gửi gắm lời yêu thương như thế nào?</p>
+
+      <!-- 3 Lựa chọn tương tác -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        <!-- Lựa chọn 1: Gửi riêng -->
+        <div class="option-card p-4 rounded-2xl bg-white border-2 border-slate-200 hover:border-rose-300 cursor-pointer transition text-left relative flex flex-col justify-between shadow-sm active:scale-95" onclick="selectWishType('private')">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-pink-50 border border-pink-200 flex items-center justify-center text-2xl mb-2.5">
+              💌
+            </div>
+            <h3 class="font-bold text-sm text-slate-800 mb-1">Gửi riêng một bạn</h3>
+            <p class="text-xs text-slate-500 leading-snug">"Ảnh" chẳng hạn....</p>
+          </div>
+          <div class="mt-3 flex items-center gap-1.5 text-xs font-semibold text-rose-500">
+            <span class="w-2 h-2 rounded-full bg-rose-400"></span> Chọn riêng tư
+          </div>
+        </div>
+
+        <!-- Lựa chọn 2: Gửi chung -->
+        <div class="option-card p-4 rounded-2xl bg-white border-2 border-slate-200 hover:border-rose-300 cursor-pointer transition text-left relative flex flex-col justify-between shadow-sm active:scale-95" onclick="selectWishType('group')">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-2xl mb-2.5">
+              👨‍👦‍👦
+            </div>
+            <h3 class="font-bold text-sm text-slate-800 mb-1">Gửi chung cả nhóm</h3>
+            <p class="text-xs text-slate-500 leading-snug">Chúc toàn thể các bạn nam luôn nhiệt huyết, vui tươi.</p>
+          </div>
+          <div class="mt-3 flex items-center gap-1.5 text-xs font-semibold text-amber-500">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span> Chúc cả team
+          </div>
+        </div>
+
+        <!-- Lựa chọn 3: Cả hai luôn (Default) -->
+        <div class="option-card selected p-4 rounded-2xl bg-white border-2 border-slate-200 hover:border-rose-300 cursor-pointer transition text-left relative flex flex-col justify-between shadow-sm active:scale-95" onclick="selectWishType('both')">
+          <!-- Tag phổ biến -->
+          <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full shadow-sm">
+            Yêu thích 💖
+          </div>
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-2xl mb-2.5">
+              🌹
+            </div>
+            <h3 class="font-bold text-sm text-slate-800 mb-1">Cả hai luôn nè!</h3>
+            <p class="text-xs text-slate-500 leading-snug">Vừa chúc chung cả nhóm, vừa có lời nhắn riêng bí mật.</p>
+          </div>
+          <div class="mt-3 flex items-center gap-1.5 text-xs font-semibold text-rose-600">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Trọn vẹn nhất
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button id="btn-to-step-3" class="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:brightness-105 active:scale-95 flex items-center justify-center gap-2 transition cursor-pointer">
+        <span>Viết ngay đây thôi</span>
+        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+      </button>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- BƯỚC 3: SOẠN LỜI CHÚC (WISH COMPOSER)      -->
+    <!-- ========================================== -->
+    <section id="step-3" class="hidden glass-card rounded-3xl p-5 sm:p-8 animate-scale-pop relative">
+      <!-- Header -->
+      <div class="text-center mb-5">
+        <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-rose-100 flex items-center justify-center text-rose-600">
+          <i data-lucide="edit-3" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Soạn Lời Chúc 19/11</h2>
+        <p id="form-subtitle" class="text-slate-500 text-xs sm:text-sm">Hãy gửi những lời chúc ấm áp nhất đến các bạn nam nhé!</p>
+      </div>
+
+      <!-- Form gửi lời chúc -->
+      <form id="wishes-form" class="space-y-4">
+        <!-- 1. Tên người gửi -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">
+              Tên / Biệt danh của bạn <span class="text-rose-500">*</span>
+            </label>
+            <label class="text-[11px] text-slate-500 flex items-center gap-1 cursor-pointer">
+              <input type="checkbox" id="check-anonymous" class="rounded text-rose-500 focus:ring-rose-400">
+              <span>Gửi ẩn danh 🤫</span>
+            </label>
+          </div>
+          <div class="relative">
+            <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+            <input type="text" id="sender-name" required placeholder="Ví dụ: Một người bạn giấu tên, Khánh Vy, Diệu Linh..." 
+                   class="w-full pl-10 pr-4 py-2.5 bg-white/95 rounded-xl border border-slate-200 text-slate-800 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition">
+          </div>
+        </div>
+
+        <!-- 2. Tên bạn nam nhận lời chúc riêng (Hiển thị khi chọn Private hoặc Both) -->
+        <div id="field-recipient">
+          <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">
+            Bạn muốn gửi riêng tới ai? <span class="text-rose-500">*</span>
+          </label>
+          <div class="relative">
+            <i data-lucide="heart" class="w-4 h-4 text-rose-400 absolute left-3.5 top-3.5"></i>
+            <input type="text" id="recipient-name" placeholder="Ví dụ: Bạn Long, Anh Trưởng nhóm, Chàng trai áo trắng..." 
+                   class="w-full pl-10 pr-4 py-2.5 bg-white/95 rounded-xl border border-slate-200 text-slate-800 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition">
+          </div>
+        </div>
+
+        <!-- 3. Lời chúc riêng tư -->
+        <div id="field-private-msg">
+          <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">
+            Lời chúc riêng tư gửi bạn ấy 💌
+          </label>
+          <textarea id="private-msg" rows="2" placeholder="Gửi lời chúc ngọt ngào, động viên hoặc tỏ tình bí mật nè..." 
+                    class="w-full px-3.5 py-2.5 bg-white/95 rounded-xl border border-slate-200 text-slate-800 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition"></textarea>
+        </div>
+
+        <!-- 4. Lời chúc chung cho các bạn nam -->
+        <div id="field-group-msg">
+          <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">
+            Lời chúc chung đến TẤT CẢ các bạn nam trong nhóm 👨‍👦‍👦
+          </label>
+          <textarea id="group-msg" rows="2" placeholder="Chúc toàn thể anh em 19/11 luôn vui vẻ, tràn đầy nhiệt huyết và gặt hái nhiều thành công..." 
+                    class="w-full px-3.5 py-2.5 bg-white/95 rounded-xl border border-slate-200 text-slate-800 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition"></textarea>
+        </div>
+
+        <!-- 5. Tặng kèm danh hiệu khen tặng vui nhộn -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">
+            Tặng kèm một danh hiệu khen tặng 🏆
+          </label>
+          <div class="flex flex-wrap gap-1.5">
+            <label class="cursor-pointer">
+              <input type="radio" name="badge" value="Đẹp trai số 1 😎" checked class="peer sr-only">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200 peer-checked:bg-rose-100 peer-checked:text-rose-700 peer-checked:border-rose-300 transition">
+                Đẹp trai số 1 😎
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="badge" value="Ấm áp, tâm lý ☀️" class="peer sr-only">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200 peer-checked:bg-rose-100 peer-checked:text-rose-700 peer-checked:border-rose-300 transition">
+                Ấm áp, tâm lý ☀️
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="badge" value="Nhiệt huyết gánh team 🚀" class="peer sr-only">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200 peer-checked:bg-rose-100 peer-checked:text-rose-700 peer-checked:border-rose-300 transition">
+                Nhiệt huyết gánh team 🚀
+              </span>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="badge" value="Sớm có người yêu 💘" class="peer sr-only">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200 peer-checked:bg-rose-100 peer-checked:text-rose-700 peer-checked:border-rose-300 transition">
+                Sớm có người yêu 💘
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white font-extrabold text-base shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:brightness-105 active:scale-95 flex items-center justify-center gap-2 transition cursor-pointer">
+          <i data-lucide="send" class="w-5 h-5"></i>
+          <span>Gửi Lời Chúc & Tạo Tấm Thiệp 💌🌹</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- BƯỚC 4: TẤM THIỆP 19/11 HOÀN TẤT (CARD)    -->
+    <!-- ========================================== -->
+    <section id="step-4" class="hidden animate-scale-pop relative">
+      <!-- Bức thư tay Vintage Pastel Card -->
+      <div class="letter-card rounded-3xl p-6 sm:p-8 relative overflow-hidden border-2 border-rose-200 shadow-2xl">
+        <!-- Dấu sáp niêm phong góc thiệp -->
+        <div class="absolute -right-4 -top-4 w-20 h-20 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center shadow-md rotate-12 border-2 border-white pointer-events-none">
+          <span class="text-white text-xl">🌹</span>
+        </div>
+
+        <!-- Success Header -->
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold mb-2 border border-rose-200">
+            <span>🎉 ĐÃ GỬI LỜI CHÚC THÀNH CÔNG!</span>
+          </div>
+          <h2 class="text-2xl font-black text-slate-900 tracking-tight">Tấm Thiệp 19/11 Yêu Thương</h2>
+          <p class="text-slate-500 text-xs mt-0.5">Lời chúc của bạn đã được đóng dấu gửi gắm trọn vẹn!</p>
+        </div>
+
+        <!-- Nội dung thiệp viết tay -->
+        <div class="bg-white/80 rounded-2xl p-5 border border-dashed border-rose-300 shadow-sm space-y-4 text-left relative">
+          <!-- Người nhận -->
+          <div class="border-b border-rose-100 pb-3">
+            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest block">GỬI TỚI</span>
+            <div id="card-display-to" class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2 mt-0.5">
+              <span>Các Chàng Trai Nhóm Mân Côi</span>
+            </div>
+          </div>
+
+          <!-- Lời chúc riêng (Nếu có) -->
+          <div id="card-box-private" class="space-y-1 bg-pink-50/60 p-3.5 rounded-xl border border-pink-100">
+            <span class="text-[11px] font-bold text-pink-600 flex items-center gap-1">
+              <i data-lucide="lock" class="w-3 h-3"></i> Lời nhắn gửi riêng tư:
+            </span>
+            <p id="card-display-private" class="text-sm text-slate-700 italic leading-relaxed font-sans">
+              "Chúc bạn luôn tỏa sáng và thành công trên mọi con đường nhé!"
+            </p>
+          </div>
+
+          <!-- Lời chúc chung (Nếu có) -->
+          <div id="card-box-group" class="space-y-1 bg-amber-50/60 p-3.5 rounded-xl border border-amber-100">
+            <span class="text-[11px] font-bold text-amber-700 flex items-center gap-1">
+              <i data-lucide="users" class="w-3 h-3"></i> Lời chúc chung cả nhóm:
+            </span>
+            <p id="card-display-group" class="text-sm text-slate-700 leading-relaxed font-sans">
+              "Chúc toàn thể các bạn nam 19/11 ngập tràn niềm vui, mạnh khỏe và luôn là chỗ dựa vững vàng!"
+            </p>
+          </div>
+
+          <!-- Người gửi & Danh hiệu -->
+          <div class="pt-2 border-t border-rose-100 flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <span class="text-[10px] text-slate-400 block uppercase tracking-wider">NGƯỜI GỬI</span>
+              <strong id="card-display-from" class="text-slate-800 text-sm font-bold">Người Bạn Giấu Tên</strong>
+            </div>
+            <div class="text-right">
+              <span id="card-display-badge" class="inline-block px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 text-xs font-bold">
+                Đẹp trai số 1 😎
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-6 space-y-2.5">
+          <!-- Gửi thêm lời chúc khác -->
+          <button id="btn-restart" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-sm shadow-md hover:brightness-105 transition flex items-center justify-center gap-2 active:scale-95">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>Gửi thêm lời chúc cho bạn khác 💌</span>
+          </button>
+
+          <!-- Xem danh sách lời chúc -->
+          <button id="btn-view-all" class="w-full py-2.5 rounded-xl bg-white border border-rose-200 text-rose-600 font-bold text-xs hover:bg-rose-50 transition flex items-center justify-center gap-1.5 active:scale-95">
+            <i data-lucide="list" class="w-3.5 h-3.5"></i>
+            <span>Xem danh sách lời chúc đã gửi</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal danh sách lời chúc đã gửi -->
+    <div id="wishes-modal" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-md max-h-[80vh] flex flex-col shadow-2xl animate-scale-pop">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+          <h3 class="font-extrabold text-base text-slate-800 flex items-center gap-1.5">
+            <span>📜</span> Danh Sách Lời Chúc Đã Gửi
+          </h3>
+          <button id="btn-close-modal" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">✕</button>
+        </div>
+        <div id="wishes-list" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-xs">
+          <!-- Render danh sách lời chúc ở đây -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-lg mx-auto text-center pb-2 relative z-10 text-xs text-slate-400 font-medium">
+    
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC                           -->
+  <!-- ========================================== -->
+  <script>
+    lucide.createIcons();
+
+    /* ========================================================
+       ÂM THANH HIỆU ỨNG (WEB AUDIO API)
+       ======================================================== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 600, type = 'sine', duration = 0.15) {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playSuccessChime() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => playBeep(freq, 'triangle', 0.25), idx * 85);
+      });
+    }
+
+    /* ========================================================
+       HẠT TIM VÀ HOA BAY LƠ LỬNG
+       ======================================================== */
+    const particlesContainer = document.getElementById('particles-container');
+    const symbols = ['🌸', '💖', '🌹', '💌', '🎀', '💐', '🌷', '🤍'];
+    for (let i = 0; i < 22; i++) {
+      const el = document.createElement('div');
+      el.className = 'petal text-sm sm:text-base opacity-40 select-none';
+      el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.top = `${Math.random() * 100}%`;
+      el.style.animationDelay = `${Math.random() * 5}s`;
+      el.style.animationDuration = `${3 + Math.random() * 4}s`;
+      particlesContainer.appendChild(el);
+    }
+
+    /* ========================================================
+       LOGIC BƯỚC 1: NÚT KHÔNG NÉ TRÁNH & NÚT CÓ PHÓNG TO CHÍNH GIỮA
+       ======================================================== */
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+    const textYes = document.getElementById('text-yes');
+    const textNo = document.getElementById('text-no');
+    const stepIcon = document.getElementById('step-icon');
+    const hintText = document.getElementById('hint-text');
+
+    const yesPhrases = [
+      "Có chứ nè! 🙋‍♀️",
+      "Mình muốn gửi lắm! 🌹",
+      "Gửi lời chúc siêu xịn! 💖",
+      "Yêu thương ngập tràn! 🌸",
+      "Chắc chắn phải gửi rồi! 🎉",
+      "100% GỬI LỜI CHÚC NÈEEE! 🚀"
+    ];
+
+    const noPhrases = [
+      "Không 🙅‍♀️",
+      "Để mình suy nghĩ... 🤔",
+      "Ủa nỡ lòng nào vậy má 🥺",
+      "Không sợ ta nghĩ quẩn hả trời 😭",
+      "Bấm bên nút Có kìa! 👉",
+      "Ơ kìa bấm bên Có điii 😜"
+    ];
+
+    textYes.innerText = yesPhrases[0];
+    textNo.innerText = noPhrases[0];
+
+    const jumpOffsets = [
+      { x: -110, y: -45 },
+      { x: 120, y: 50 },
+      { x: -130, y: 55 },
+      { x: 135, y: -40 },
+      { x: -150, y: 30 },
+      { x: 190, y: 60 },
+      { x: -240, y: -240 }
+    ];
+
+    let noCount = 0;
+    let yesScale = 1;
+
+    function handleNoInteraction(e) {
+      if (e) e.preventDefault();
+      noCount++;
+      playBeep(260, 'sawtooth', 0.12);
+
+      // Tách nút Không để nút Có bay về CHÍNH GIỮA 100%
+      if (btnNo.style.position !== 'absolute') {
+        btnNo.style.position = 'absolute';
+      }
+
+      // 1. Đổi text nút Không
+      const noIndex = Math.min(noCount, noPhrases.length - 1);
+      textNo.innerText = noPhrases[noIndex];
+
+      // 2. Thu nhỏ nút Không
+      const noScale = Math.max(0.48, 1 - noCount * 0.1);
+
+      // 3. Nhảy sang hướng khác
+      const isMobile = window.innerWidth < 640;
+      const factorX = isMobile ? 0.6 : 1.0;
+      const factorY = isMobile ? 0.75 : 1.0;
+      const offset = jumpOffsets[(noCount - 1) % jumpOffsets.length];
+      btnNo.style.transform = `translate(${offset.x * factorX}px, ${offset.y * factorY}px) scale(${noScale})`;
+
+      // 4. Phóng to nút Có
+      const maxScale = isMobile ? 1.45 : 1.9;
+      yesScale = Math.min(maxScale, 1 + noCount * 0.18);
+      const yesIndex = Math.min(noCount, yesPhrases.length - 1);
+      textYes.innerText = yesPhrases[yesIndex];
+      btnYes.style.transform = `scale(${yesScale})`;
+
+      const icons = ['🎁', '👀', '🥺', '😢', '😭', '🤯', '🥳'];
+      stepIcon.innerText = icons[Math.min(noCount, icons.length - 1)];
+
+      const hints = [
+        "Ơ kìa, một năm có một ngày 19/11 thôi đó... 🥺",
+        "Gửi một lời chúc để các bạn nam có thêm động lực nè! 🌸",
+        "Biết đâu nhận lại một điều bất ngờ siêu ngọt ngào thì sao? 💌",
+        "Nút 'Không' sắp teo nhỏ biến mất luôn rồi kìa! 🏃💨",
+        "Bấm bên nút 'CÓ' cho lẹ đi nàoooo! 👉💖"
+      ];
+      hintText.innerText = hints[Math.min(noCount - 1, hints.length - 1)];
+      hintText.classList.add('text-rose-600', 'font-semibold');
+    }
+
+    btnNo.addEventListener('mouseenter', handleNoInteraction);
+    btnNo.addEventListener('click', handleNoInteraction);
+    btnNo.addEventListener('touchstart', handleNoInteraction, { passive: false });
+
+    /* ========================================================
+       CHUYỂN SANG BƯỚC 2: CHỌN HÌNH THỨC GỬI LỜI CHÚC
+       ======================================================== */
+    btnYes.addEventListener('click', () => {
+      playSuccessChime();
+      
+      confetti({
+        particleCount: 130,
+        spread: 85,
+        origin: { y: 0.6 },
+        colors: ['#fda4af', '#f43f5e', '#fb7185', '#fff']
+      });
+
+      document.getElementById('step-1').classList.add('hidden');
+      document.getElementById('step-2').classList.remove('hidden');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ========================================================
+       LOGIC BƯỚC 2: LỰA CHỌN GỬI RIÊNG, GỬI CHUNG HAY CẢ HAI
+       ======================================================== */
+    let currentWishType = 'both'; // 'private' | 'group' | 'both'
+
+    function selectWishType(type) {
+      currentWishType = type;
+      playBeep(450, 'sine', 0.1);
+
+      document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    // Chuyển sang Bước 3: Form soạn thảo
+    document.getElementById('btn-to-step-3').addEventListener('click', () => {
+      playBeep(480, 'sine', 0.15);
+      
+      const fieldRecipient = document.getElementById('field-recipient');
+      const fieldPrivateMsg = document.getElementById('field-private-msg');
+      const fieldGroupMsg = document.getElementById('field-group-msg');
+      const formSubtitle = document.getElementById('form-subtitle');
+      const recipientInput = document.getElementById('recipient-name');
+
+      if (currentWishType === 'private') {
+        fieldRecipient.classList.remove('hidden');
+        fieldPrivateMsg.classList.remove('hidden');
+        fieldGroupMsg.classList.add('hidden');
+        recipientInput.required = true;
+        formSubtitle.innerText = "Gửi lời chúc riêng tư đến chàng trai đặc biệt 💌";
+      } else if (currentWishType === 'group') {
+        fieldRecipient.classList.add('hidden');
+        fieldPrivateMsg.classList.add('hidden');
+        fieldGroupMsg.classList.remove('hidden');
+        recipientInput.required = false;
+        formSubtitle.innerText = "Gửi lời chúc mừng chung đến toàn thể các bạn nam 👨‍👦‍👦";
+      } else {
+        // 'both'
+        fieldRecipient.classList.remove('hidden');
+        fieldPrivateMsg.classList.remove('hidden');
+        fieldGroupMsg.classList.remove('hidden');
+        recipientInput.required = true;
+        formSubtitle.innerText = "Vừa chúc chung cả nhóm, vừa có lời nhắn riêng bí mật ✨";
+      }
+
+      document.getElementById('step-2').classList.add('hidden');
+      document.getElementById('step-3').classList.remove('hidden');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ========================================================
+       LOGIC BƯỚC 3 & 4: NỘP LỜI CHÚC & TẠO THIỆP
+       ======================================================== */
+    const isAnonymous = document.getElementById('check-anonymous');
+    const senderInput = document.getElementById('sender-name');
+    isAnonymous.addEventListener('change', () => {
+      if (isAnonymous.checked) {
+        senderInput.value = "Một người bạn giấu tên 🤫";
+        senderInput.disabled = true;
+      } else {
+        senderInput.value = "";
+        senderInput.disabled = false;
+      }
+    });
+
+    const wishesForm = document.getElementById('wishes-form');
+    wishesForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const sender = senderInput.value.trim() || "Người bạn giấu tên";
+      const recipient = document.getElementById('recipient-name').value.trim() || "Chàng trai đặc biệt";
+      const privateMsg = document.getElementById('private-msg').value.trim() || "Chúc bạn luôn vui vẻ, may mắn và hạnh phúc nhé!";
+      const groupMsg = document.getElementById('group-msg').value.trim() || "Chúc toàn thể các bạn nam ngày 19/11 thật nhiều niềm vui và luôn là chỗ dựa vững vàng!";
+      const badge = document.querySelector('input[name="badge"]:checked').value;
+
+      // Cập nhật lên tấm thiệp ở Bước 4
+      const cardTo = document.getElementById('card-display-to');
+      const cardFrom = document.getElementById('card-display-from');
+      const cardBadge = document.getElementById('card-display-badge');
+      const cardBoxPrivate = document.getElementById('card-box-private');
+      const cardBoxGroup = document.getElementById('card-box-group');
+      const cardDisplayPrivate = document.getElementById('card-display-private');
+      const cardDisplayGroup = document.getElementById('card-display-group');
+
+      cardFrom.innerText = sender;
+      cardBadge.innerText = badge;
+
+      if (currentWishType === 'private') {
+        cardTo.innerHTML = `<span>Bạn ${recipient} 💌</span>`;
+        cardBoxPrivate.classList.remove('hidden');
+        cardBoxGroup.classList.add('hidden');
+        cardDisplayPrivate.innerText = `"${privateMsg}"`;
+      } else if (currentWishType === 'group') {
+        cardTo.innerHTML = `<span>Toàn thể các bạn nam trong nhóm 👨‍👦‍👦</span>`;
+        cardBoxPrivate.classList.add('hidden');
+        cardBoxGroup.classList.remove('hidden');
+        cardDisplayGroup.innerText = `"${groupMsg}"`;
+      } else {
+        cardTo.innerHTML = `<span>Bạn ${recipient} & Anh em trong nhóm ✨</span>`;
+        cardBoxPrivate.classList.remove('hidden');
+        cardBoxGroup.classList.remove('hidden');
+        cardDisplayPrivate.innerText = `"${privateMsg}"`;
+        cardDisplayGroup.innerText = `"${groupMsg}"`;
+      }
+
+      // Bắn pháo hoa rực rỡ
+      playSuccessChime();
+      confetti({
+        particleCount: 160,
+        spread: 95,
+        origin: { y: 0.5 },
+        colors: ['#f43f5e', '#fda4af', '#fecdd3', '#fed7aa', '#fff']
+      });
+
+      // Lưu vào LocalStorage
+      const newWish = {
+        id: Date.now(),
+        type: currentWishType,
+        sender,
+        recipient: currentWishType !== 'group' ? recipient : 'Cả nhóm',
+        privateMsg,
+        groupMsg,
+        badge,
+        createdAt: new Date().toLocaleString('vi-VN')
+      };
+      const savedWishes = JSON.parse(localStorage.getItem('mens_day_wishes') || '[]');
+      savedWishes.unshift(newWish);
+      localStorage.setItem('mens_day_wishes', JSON.stringify(savedWishes));
+
+      // Chuyển view
+      document.getElementById('step-3').classList.add('hidden');
+      document.getElementById('step-4').classList.remove('hidden');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ========================================================
+       CHƠI LẠI TỪ ĐẦU (GỬI THÊM LỜI CHÚC KHÁC)
+       ======================================================== */
+    document.getElementById('btn-restart').addEventListener('click', () => {
+      noCount = 0;
+      yesScale = 1;
+      textNo.innerText = noPhrases[0];
+      textYes.innerText = yesPhrases[0];
+      btnYes.style.transform = `scale(1)`;
+      btnNo.style.position = '';
+      btnNo.style.transform = `translate(0px, 0px) scale(1)`;
+      stepIcon.innerText = '🎁';
+      hintText.innerText = "💡 Đừng ngần ngại gửi một lời chúc ấm áp nhé!";
+      hintText.classList.remove('text-rose-600', 'font-semibold');
+
+      // Reset form
+      wishesForm.reset();
+      senderInput.disabled = false;
+
+      document.getElementById('step-4').classList.add('hidden');
+      document.getElementById('step-1').classList.remove('hidden');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ========================================================
+       MODAL XEM DANH SÁCH LỜI CHÚC ĐÃ GỬI
+       ======================================================== */
+    const modal = document.getElementById('wishes-modal');
+    const wishesList = document.getElementById('wishes-list');
+    document.getElementById('btn-view-all').addEventListener('click', () => {
+      const savedWishes = JSON.parse(localStorage.getItem('mens_day_wishes') || '[]');
+      if (savedWishes.length === 0) {
+        wishesList.innerHTML = `<p class="text-slate-400 italic text-center py-4">Chưa có lời chúc nào được lưu.</p>`;
+      } else {
+        wishesList.innerHTML = savedWishes.map((w, idx) => `
+          <div class="p-3 bg-rose-50/60 rounded-xl border border-rose-100 text-slate-700 space-y-1">
+            <div class="flex items-center justify-between font-bold text-rose-600">
+              <span>#${idx + 1} • Gửi: ${w.recipient}</span>
+              <span class="text-[10px] text-slate-400 font-normal">${w.createdAt}</span>
+            </div>
+            ${w.privateMsg ? `<p class="italic text-slate-600">" ${w.privateMsg} "</p>` : ''}
+            ${w.groupMsg ? `<p class="text-slate-600"><strong>Chúc nhóm:</strong> ${w.groupMsg}</p>` : ''}
+            <div class="text-[11px] text-slate-500 pt-1 flex justify-between">
+              <span>Bởi: <strong>${w.sender}</strong></span>
+              <span class="text-rose-500 font-semibold">${w.badge}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      modal.classList.remove('hidden');
+    });
+
+    document.getElementById('btn-close-modal').addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
